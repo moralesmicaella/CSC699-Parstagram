@@ -23,4 +23,4 @@ The following **bonus** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.imgur.com/5orfKX9.gifv' title='insta gif' width='' alt='insta gif' />
+![](insta.gif)
