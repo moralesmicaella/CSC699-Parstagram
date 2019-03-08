@@ -236,14 +236,8 @@
                                     <outletCollection property="gestureRecognizers" destination="gUA-Ty-YW7" appends="YES" id="e9G-S6-09U"/>
                                 </connections>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TAv-6e-Ubh">
-                                <rect key="frame" x="16" y="411" width="334" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTo-cc-zEc">
-                                <rect key="frame" x="16" y="470" width="334" height="30"/>
+                                <rect key="frame" x="16" y="505" width="343" height="30"/>
                                 <state key="normal" title="Share"/>
                                 <connections>
                                     <action selector="onShareButton:" destination="l9g-ce-frz" eventType="touchUpInside" id="sFX-sl-pLe"/>
@@ -256,26 +250,38 @@
                                     <action selector="onCancelButton:" destination="l9g-ce-frz" eventType="touchUpInside" id="rV8-dZ-z4B"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gVm-XS-v7C">
+                                <rect key="frame" x="16" y="415" width="343" height="82"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="nTo-cc-zEc" firstAttribute="top" secondItem="TAv-6e-Ubh" secondAttribute="bottom" constant="29" id="0P6-vt-HVW"/>
                             <constraint firstItem="u2x-u5-zkU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qbd-jK-00l" secondAttribute="leading" id="4Yq-HD-mj5"/>
+                            <constraint firstItem="nTo-cc-zEc" firstAttribute="top" secondItem="gVm-XS-v7C" secondAttribute="bottom" constant="8" id="7nO-3X-IUd"/>
                             <constraint firstItem="NE8-f1-Thj" firstAttribute="leading" secondItem="Qbd-jK-00l" secondAttribute="leading" constant="16" id="8QI-e6-zVj"/>
                             <constraint firstItem="NE8-f1-Thj" firstAttribute="top" secondItem="Qbd-jK-00l" secondAttribute="top" constant="50" id="99E-6Y-S6L"/>
                             <constraint firstItem="Qbd-jK-00l" firstAttribute="trailing" secondItem="u2x-u5-zkU" secondAttribute="trailing" constant="24" id="ELt-rd-XEO"/>
                             <constraint firstItem="u2x-u5-zkU" firstAttribute="top" secondItem="Qbd-jK-00l" secondAttribute="top" constant="15" id="UdI-gT-JnJ"/>
-                            <constraint firstItem="Qbd-jK-00l" firstAttribute="trailing" secondItem="nTo-cc-zEc" secondAttribute="trailing" constant="25" id="Vg2-Ho-EdO"/>
+                            <constraint firstItem="gVm-XS-v7C" firstAttribute="leading" secondItem="Qbd-jK-00l" secondAttribute="leading" constant="16" id="VTB-5E-xQH"/>
                             <constraint firstItem="Qbd-jK-00l" firstAttribute="trailing" secondItem="NE8-f1-Thj" secondAttribute="trailing" constant="16" id="XHb-pW-Mug"/>
-                            <constraint firstItem="Qbd-jK-00l" firstAttribute="trailing" secondItem="TAv-6e-Ubh" secondAttribute="trailing" constant="25" id="Yoq-4M-Lo0"/>
-                            <constraint firstItem="TAv-6e-Ubh" firstAttribute="top" secondItem="NE8-f1-Thj" secondAttribute="bottom" constant="12" id="aQe-2V-PFk"/>
-                            <constraint firstItem="nTo-cc-zEc" firstAttribute="leading" secondItem="Qbd-jK-00l" secondAttribute="leading" constant="16" id="lbY-mg-2fL"/>
-                            <constraint firstItem="TAv-6e-Ubh" firstAttribute="leading" secondItem="Qbd-jK-00l" secondAttribute="leading" constant="16" id="v7S-6a-vSA"/>
+                            <constraint firstItem="Qbd-jK-00l" firstAttribute="trailing" secondItem="nTo-cc-zEc" secondAttribute="trailing" constant="16" id="Y7d-eN-cjy"/>
+                            <constraint firstItem="gVm-XS-v7C" firstAttribute="top" secondItem="NE8-f1-Thj" secondAttribute="bottom" constant="16" id="eZk-df-uBD"/>
+                            <constraint firstItem="nTo-cc-zEc" firstAttribute="leading" secondItem="Qbd-jK-00l" secondAttribute="leading" constant="16" id="erF-WO-Sr8"/>
+                            <constraint firstItem="Qbd-jK-00l" firstAttribute="trailing" secondItem="gVm-XS-v7C" secondAttribute="trailing" constant="16" id="s3J-UO-wYW"/>
+                            <constraint firstItem="Qbd-jK-00l" firstAttribute="bottom" secondItem="nTo-cc-zEc" secondAttribute="bottom" constant="132" id="wvY-mr-Ahc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Qbd-jK-00l"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="XCb-nY-Hqp" appends="YES" id="fNs-Sq-hhc"/>
+                        </connections>
                     </view>
                     <connections>
-                        <outlet property="commentTextField" destination="TAv-6e-Ubh" id="aOL-jr-TL9"/>
+                        <outlet property="commentTextView" destination="gVm-XS-v7C" id="Mhj-he-vYF"/>
                         <outlet property="imageView" destination="NE8-f1-Thj" id="pFQ-R4-AzX"/>
                     </connections>
                 </viewController>
@@ -283,6 +289,11 @@
                 <tapGestureRecognizer id="gUA-Ty-YW7">
                     <connections>
                         <action selector="onCameraButton:" destination="l9g-ce-frz" id="j0p-GP-N4q"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="XCb-nY-Hqp">
+                    <connections>
+                        <action selector="onTap:" destination="l9g-ce-frz" id="LOg-Dn-Vz9"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

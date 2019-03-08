@@ -15,24 +15,23 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableView: UITableView!
     
     var posts = [PFObject]()
-    var postLimit = 20
+    var postLimit: Int!
     let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadPosts()
         
         tableView.delegate = self
         tableView.dataSource = self
         
         // Do any additional setup after loading the view.
-        refreshControl.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(loadPosts), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        self.loadPosts(postLimit)
         
         let titleImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 5))
         titleImageView.contentMode = .scaleAspectFit
@@ -45,36 +44,29 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationItem.titleView = titleImageView
     }
     
-    @objc func onRefresh() {
-        run(after: 2) {
-            self.refreshControl.endRefreshing()
-        }
-    }
-    
-    func run(after wait: TimeInterval, closure: @escaping () -> Void) {
-        let queue = DispatchQueue.main
-        queue.asyncAfter(deadline: DispatchTime.now() + wait, execute: closure)
-    }
-    
-    func loadPosts(_ limit: Int) {
-        let query = PFQuery(className:"Posts")
-        query.includeKey("author")
-        query.limit = limit
-        query.addDescendingOrder("createdAt")
-        query.findObjectsInBackground { (posts, error) in
-            if posts != nil {
-                self.posts = posts!
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
-    func loadMorePosts() {
+    @objc func loadPosts() {
+        postLimit = 5
         let query = PFQuery(className:"Posts")
         query.includeKey("author")
         query.limit = postLimit
         query.addDescendingOrder("createdAt")
         query.findObjectsInBackground { (posts, error) in
+            if posts != nil {
+                self.posts = posts!
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
+    }
+    
+    func loadMorePosts() {
+        postLimit = postLimit + 5
+        let query = PFQuery(className:"Posts")
+        query.includeKey("author")
+        query.limit = postLimit
+        query.addDescendingOrder("createdAt")
+        query.findObjectsInBackground { (posts, error) in
+            self.posts.removeAll()
             if posts != nil {
                 self.posts = posts!
                 self.tableView.reloadData()
@@ -89,10 +81,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 1 == posts.count {
-            postLimit += 10
-            //loadPosts(postLimit)
-            print("load more")
-            //loadMorePosts()
+            print(String(indexPath.row) + " " + String(postLimit))
+            //self.posts.removeAll()
+            loadMorePosts()
+            //print(posts.count)
         }
     }
     

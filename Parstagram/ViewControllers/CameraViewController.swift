@@ -10,16 +10,40 @@ import UIKit
 import AlamofireImage
 import Parse
 
-class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var commentTextView: UITextView!
     
+    var placeholderLabel : UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        commentTextView.delegate = self
+        //commentTextView.becomeFirstResponder()
+        placeholderLabel = UILabel()
+        placeholderLabel.text = "Write a Caption..."
+        placeholderLabel.font = UIFont.italicSystemFont(ofSize: (commentTextView.font?.pointSize)!)
+        placeholderLabel.sizeToFit()
+        commentTextView.addSubview(placeholderLabel)
+        placeholderLabel.frame.origin = CGPoint(x: 5, y: (commentTextView.font?.pointSize)! / 2)
+        placeholderLabel.textColor = UIColor.lightGray
+        placeholderLabel.isHidden = !commentTextView.text.isEmpty
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        placeholderLabel.isHidden = true
+        commentTextView.textColor = UIColor.black
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        placeholderLabel.isHidden = !commentTextView.text.isEmpty
+    }
+    
+    @IBAction func onTap(_ sender: Any) {
+        view.endEditing(true)
     }
     
     @IBAction func onShareButton(_ sender: Any) {
@@ -28,7 +52,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         let file = PFFileObject(data: imageData!)
         
         post["author"] = PFUser.current()
-        post["caption"] = commentTextField.text
+        post["caption"] = commentTextView.text
         post["image"] = file
         
         post.saveInBackground { (success, error) in
