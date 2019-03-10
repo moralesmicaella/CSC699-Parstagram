@@ -52,6 +52,7 @@ class LoginViewController: UIViewController {
         
         user.signUpInBackground { (success, error) in
             if (success) {
+                UserDefaults.standard.set(true, forKey: "userLoggedIn")
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
             else {

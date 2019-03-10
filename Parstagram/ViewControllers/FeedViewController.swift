@@ -20,11 +20,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadPosts()
         
         tableView.delegate = self
         tableView.dataSource = self
         
+        loadPosts()
         // Do any additional setup after loading the view.
         refreshControl.addTarget(self, action: #selector(loadPosts), for: .valueChanged)
         tableView.refreshControl = refreshControl
@@ -60,13 +60,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func loadMorePosts() {
-        postLimit = postLimit + 5
+        self.posts.removeAll()
+        postLimit += 5
         let query = PFQuery(className:"Posts")
         query.includeKey("author")
         query.limit = postLimit
         query.addDescendingOrder("createdAt")
         query.findObjectsInBackground { (posts, error) in
-            self.posts.removeAll()
             if posts != nil {
                 self.posts = posts!
                 self.tableView.reloadData()
@@ -80,11 +80,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == posts.count {
-            //print(String(indexPath.row) + " " + String(postLimit))
-            //self.posts.removeAll()
+        if (indexPath.row + 1 == posts.count) {
             loadMorePosts()
-            //print(posts.count)
         }
     }
     
