@@ -81,7 +81,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 1 == posts.count {
-            print(String(indexPath.row) + " " + String(postLimit))
+            //print(String(indexPath.row) + " " + String(postLimit))
             //self.posts.removeAll()
             loadMorePosts()
             //print(posts.count)

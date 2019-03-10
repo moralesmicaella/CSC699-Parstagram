@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
         user.password = passwordTextField.text
         
         user.signUpInBackground { (success, error) in
-            if (error != nil) {
+            if (success) {
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
             else {
