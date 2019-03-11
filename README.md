@@ -24,3 +24,5 @@ The following **bonus** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 ![](insta.gif)
+
+![](insta_update1.gif)
