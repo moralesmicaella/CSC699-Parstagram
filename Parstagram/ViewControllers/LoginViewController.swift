@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
+    @IBOutlet weak var alertLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,28 +38,18 @@ class LoginViewController: UIViewController {
         PFUser.logInWithUsername(inBackground: username!, password: password!) { (user, error) in
             if (user != nil) {
                 UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                self.alertLabel.isHidden = true
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
             else {
                 print("Error: \(String(describing: error?.localizedDescription))")
+                self.alertLabel.isHidden = false
             }
         }
     }
     
     @IBAction func onSignUp(_ sender: Any) {
-        let user = PFUser()
-        user.username = usernameTextField.text
-        user.password = passwordTextField.text
-        
-        user.signUpInBackground { (success, error) in
-            if (success) {
-                UserDefaults.standard.set(true, forKey: "userLoggedIn")
-                self.performSegue(withIdentifier: "loginSegue", sender: nil)
-            }
-            else {
-                print("Error: \(String(describing: error?.localizedDescription))")
-            }
-        }
+        self.performSegue(withIdentifier: "signupSegue", sender: nil)
     }
     
     /*
