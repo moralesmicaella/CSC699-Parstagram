@@ -2,17 +2,25 @@
 //  CommentCell.swift
 //  Parstagram
 //
-//  Created by Micaella Morales on 3/11/19.
-//  Copyright © 2019 Micaella Morales. All rights reserved.
+//  Created by Micaella Morales on 3/16/21.
 //
 
 import UIKit
 
 class CommentCell: UITableViewCell {
     
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var commentLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet var commentLabel: UILabel!
+    @IBOutlet var profileImageView: UIImageView!
+    
+    var comment: Comment! {
+        didSet {
+            let comment = NSString(string: self.comment.user.username! + " " + self.comment.text)
+            let usernameRange = comment.range(of: self.comment.user.username!)
+            let attributedCaption = NSMutableAttributedString(string: comment as String)
+            attributedCaption.addAttribute(NSAttributedString.Key.font, value: UIFont(name: "Helvetica Neue Medium", size: 15)!, range: usernameRange)
+            commentLabel.attributedText = attributedCaption
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

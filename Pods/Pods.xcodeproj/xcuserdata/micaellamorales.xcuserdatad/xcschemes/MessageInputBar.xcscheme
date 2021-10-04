@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "716080A51E71A083C7303BC65E1342B2"
+               BlueprintIdentifier = "7B28C4D8238B984881411C5F51BC30D6"
                BuildableName = "MessageInputBar.framework"
                BlueprintName = "MessageInputBar"
                ReferencedContainer = "container:Pods.xcodeproj">

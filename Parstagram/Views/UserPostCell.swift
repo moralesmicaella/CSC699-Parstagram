@@ -2,14 +2,19 @@
 //  UserPostCell.swift
 //  Parstagram
 //
-//  Created by Micaella Morales on 3/10/19.
-//  Copyright © 2019 Micaella Morales. All rights reserved.
+//  Created by Micaella Morales on 3/10/21.
 //
 
 import UIKit
 
 class UserPostCell: UICollectionViewCell {
     
-    @IBOutlet weak var userPhotoView: UIImageView!
+    @IBOutlet var postImageView: UIImageView!
+    
+    var post: Post! {
+        didSet {
+            postImageView.image = post.postImage
+        }
+    }
     
 }
